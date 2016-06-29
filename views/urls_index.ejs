@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<header>
+  <% include ./partials/_header %>
+</header>
+
+<h2>Table of Shortened Links</h2>
+
+<p><%= urls %></p>
+    <!-- Write EJS code here to display shortened links -->
+    <% for (shortURL in urls) { %>
+      <a href= '<%= urls[shortURL]%>' > <%= shortURL %> </a>
+      <% } %>
+
+   <!--  <div><%= %></div>
+    <%  %> -->
+</body>
+</html>
