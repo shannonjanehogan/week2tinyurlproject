@@ -25,11 +25,5 @@ function generateRandomShortURL(length) {
   return results;
 }
 
-// generateRandomString(6);
 
-
-var server = http.createServer(requestHandler);
-
-server.listen(PORT, () => {
-  console.log(`Server listening on: http://localhost:${PORT}`);
-});
+module.exports = generateRandomShortURL
