@@ -6,7 +6,7 @@
 </header>
   <h2> TinyURL: <b> <%= shortURL %> </b> </h2>
     <form method="POST" action= '/urls/<%= shortURL%>?_method=PUT'>
-      <input value="<%=urls[shortURL]%>" name="longURL"> </input>
+      <input value="<%=urls[shortURL]%>" > </input>
       <button type="submit">Change Original URL</button>
     </form>
 </body>

@@ -1,9 +1,9 @@
-
+"use strict";
 var express = require("express");
 var app = express();
 var PORT = process.env.PORT || 8080; // default port 8080
 const bodyParser = require("body-parser");
-var connect        = require('connect')
+//var connect        = require('connect')
 var methodOverride = require('method-override')
 var generateRandomShortURL = require('./app.js');
 
@@ -47,7 +47,9 @@ app.get("/urls", (req, res) => {
 });
 
 app.get("/urls/:id", (req, res) => {
-  let templateVars = { shortURL: req.params.id, urls: urlDatabase};
+  let templateVars = {
+    shortURL: req.params.id,
+    urls: urlDatabase }
   res.render("urls_show", templateVars);
 });
 
