@@ -4,11 +4,19 @@
 <header>
   <% include ./partials/_header %>
 </header>
-
-<h2>Table of Shortened Links</h2>
-
+<h2>Your TinyURLs</h2>
     <% for (shortURL in urls) { %>
-      <a href= '<%= [shortURL] %>' > <%= shortURL %> </a>
+      <a href= '/urls/<%= [shortURL] %>' > <%= shortURL %> </a>
+      <br>
+      <a href= '/urls/<%= [shortURL] %>' > <%= shortURL %> </a>
+      <br>
+      <form method="POST" action= '/urls/<%= shortURL%>?_method=DELETE'>
+        <button type="submit">Delete TinyURL</button>
+      </form>
+      <br>
+     <form method="GET" action= '/urls/<%= shortURL%>'>
+        <button type="submit">Update TinyURL</button>
+    </form>
       <% } %>
 
 </body>

@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-  <html lang="en">
-    <body>
-
-      <a href= '<%= urls[shortURL]%>'> <%= urls[shortURL]%></a>
-
-    </body>
-  </html>
+<html lang="en">
+<body>
+<header>
+  <% include ./partials/_header %>
+</header>
+  <h2> TinyURL: <b> <%= shortURL %> </b> </h2>
+    <form method="POST" action= '/urls/<%= shortURL%>?_method=PUT'>
+      <input value="<%=urls[shortURL]%>" name="longURL"> </input>
+      <button type="submit">Change Original URL</button>
+    </form>
+</body>
+</html>

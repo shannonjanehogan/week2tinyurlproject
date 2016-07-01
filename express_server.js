@@ -1,10 +1,10 @@
-"use strict";
+
 var express = require("express");
 var app = express();
-app.set("view engine", "ejs");
 var PORT = process.env.PORT || 8080; // default port 8080
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded());
+var connect        = require('connect')
+var methodOverride = require('method-override')
 var generateRandomShortURL = require('./app.js');
 
 var urlDatabase = {
@@ -12,6 +12,21 @@ var urlDatabase = {
   "9sm5xK": "http://www.google.com"
 };
 
+app.set("view engine", "ejs");
+
+app.use(bodyParser.urlencoded());
+
+app.use(methodOverride('_method'))
+
+app.put("/urls/:id", (req, res) => {
+  urlDatabase[req.params.id] = req.body.longURL;
+  res.redirect("/urls");
+});
+
+app.delete("/urls/:id", (req, res) => {
+  delete urlDatabase[req.params.id];
+  res.redirect("/urls");
+});
 
 app.get("/urls/new", (req, res) => {
   res.render("urls_new");
@@ -19,8 +34,7 @@ app.get("/urls/new", (req, res) => {
 
 app.post("/urls", (req, res) => {
   urlDatabase[generateRandomShortURL(6)] = req.body.longURL
-  // console.log(urlDatabase);
-  res.send("Ok");         // Respond with 'Ok' (we will replace this)
+  res.send("Refresh to see your TinyURL");
 });
 
 app.get("/", (req, res) => {
