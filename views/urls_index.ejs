@@ -8,16 +8,16 @@
     <% for (shortURL in urls) { %>
       <a href= '/urls/<%= [shortURL] %>' > <%= shortURL %> </a>
       <br>
-      <a href= '/urls/<%= [shortURL] %>' > <%= shortURL %> </a>
+      <a href= '/urls/<%= [shortURL] %>' > <%= urls[shortURL] %> </a>
       <br>
       <form method="POST" action= '/urls/<%= shortURL%>?_method=DELETE'>
         <button type="submit">Delete TinyURL</button>
       </form>
       <br>
-     <form method="GET" action= '/urls/<%= shortURL%>'>
+      <form method="GET" action= '/urls/<%= shortURL%>'>
         <button type="submit">Update TinyURL</button>
-    </form>
-      <% } %>
+      </form>
+    <% } %>
 
 </body>
 </html>
