@@ -6,19 +6,19 @@
 </header>
 <h2>Your TinyURLs</h2>
     <% for (url of urls) { %>
-      <a href= '/urls/<%= url.shortURL %>' > <%= url.shortURL %> </a>
-      <br>
-      <a href= '/urls/<%= url.longURL %>' > <%= url.longURL %> </a>
-      <br>
-      <form method="POST" action= '/urls/<%= url.shortURL%>?_method=DELETE'>
-        <button type="submit">Delete TinyURL</button>
-      </form>
-      <br>
-      <form method="GET" action= '/urls/<%= url.shortURL%>'>
-        <button type="submit">Update TinyURL</button>
-      </form>
+      <div>
+        <a href= '/urls/<%= url.shortURL %>' > <%= url.shortURL %> </a>
+        <br>
+        <a href= '<%= url.longURL %>' > <%= url.longURL %> </a>
+        <br>
+        <form method="POST" action= '/urls/<%=url.shortURL%>?_method=DELETE'>
+          <button type="submit">Delete TinyURL</button>
+        </form>
+        <form method="GET" action= '/urls/<%= url.shortURL%>'>
+          <button type="submit">Update TinyURL</button>
+        </form>
+        <br>
+      </div>
     <% } %>
-
-
 </body>
 </html>
