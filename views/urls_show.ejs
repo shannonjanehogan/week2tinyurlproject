@@ -5,9 +5,13 @@
   <% include ./partials/_header %>
 </header>
   <h2> TinyURL: <b> <%= shortURL %> </b> </h2>
-    <form method="POST" action= '/urls/<%= shortURL%>?_method=PUT'>
-      <input value="<%=urls[shortURL]%>" > </input>
-      <button type="submit">Change Original URL</button>
-    </form>
+    <form method="POST" action="/urls/<%= shortURL%>?_method=PUT">
+     <input value="<%=longURL%>" name='longURL'>
+     <br>
+       <a href= '<%=longURL%>'> <%=longURL%> </a>
+     </input>
+     <br>
+     <button type="submit">Change Original URL</button>
+   </form>
 </body>
 </html>
