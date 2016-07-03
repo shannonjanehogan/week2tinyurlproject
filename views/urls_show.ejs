@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+</head>
 <body>
-<header>
-  <% include ./partials/_header %>
-</header>
+  <header>
+    <% include ./partials/_header %>
+  </header>
   <h2> TinyURL: <b> <%= shortURL %> </b> </h2>
     <form method="POST" action="/urls/<%= shortURL%>?_method=PUT">
      <input value="<%=longURL%>" name='longURL'>
-     <br>
-       <a href= "<%=longURL%>"> <%=longURL%> </a>
+      <br>
+      <a href= "<%=longURL%>"> <%=longURL%> </a>
      </input>
      <br>
      <button type="submit">Change Original URL</button>
-   </form>
+    </form>
 </body>
 </html>

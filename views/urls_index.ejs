@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+</head>
 <body>
-<header>
-  <% include ./partials/_header %>
-</header>
-<h2>Your TinyURLs</h2>
-    <% for (url of urls) { %>
-      <div>
-        <a href= '/urls/<%= url.shortURL %>' > <%= url.shortURL %> </a>
-        <br>
-        <a href= '<%= url.longURL %>' > <%= url.longURL %> </a>
-        <br>
-        <form method="POST" action= '/urls/<%=url.shortURL%>?_method=DELETE'>
-          <button type="submit">Delete TinyURL</button>
-        </form>
-        <form method="GET" action= '/urls/<%= url.shortURL%>'>
-          <button type="submit">Update TinyURL</button>
-        </form>
-        <br>
-      </div>
-    <% } %>
+  <header>
+    <% include ./partials/_header %>
+  </header>
+  <h2>Your TinyURLs</h2>
+  <% for (url of urls) { %>
+    <div>
+      <a href= '/urls/<%= url.shortURL %>' > <%= url.shortURL %> </a>
+      <br>
+      <a href= '<%= url.longURL %>' > <%= url.longURL %> </a>
+      <br>
+      <form method="POST" action= '/urls/<%=url.shortURL%>?_method=DELETE'>
+        <button type="submit">Delete TinyURL</button>
+      </form>
+      <form method="GET" action= '/urls/<%= url.shortURL%>'>
+        <button type="submit">Update TinyURL</button>
+      </form>
+      <br>
+    </div>
+  <% } %>
 </body>
 </html>

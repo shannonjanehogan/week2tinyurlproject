@@ -1,21 +1,18 @@
 const express = require("express");
-const app = express();
-const PORT = process.env.PORT || 8080;
 const bodyParser = require("body-parser");
 const methodOverride = require('method-override')
 const generateRandomShortURL = require('./generate_random_shortURL.js');
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = "mongodb://127.0.0.1:27017/url_shortener";
+const app = express();
+const PORT = process.env.PORT || 8080;
 
 let dbInstance;
 
 MongoClient.connect(MONGODB_URI, (err, db) => {
-  if (err) {
-    throw err;
-  } else {
-    console.log("Connected to the db successfully!!!");
-    dbInstance = db;
-  }
+  if (err) { throw err; }
+  console.log("Connected to the db successfully!!!");
+  dbInstance = db;
 });
 
 app.set("view engine", "ejs");
@@ -53,7 +50,7 @@ app.post("/urls", (req, res) => {
 
 
 app.get("/", (req, res) => {
-  res.end("Hello!");
+  res.redirect("/urls");
 });
 
 
@@ -72,12 +69,6 @@ app.get("/urls/:id", (req, res) => {
     res.render("urls_show", templateVars);
   });
 });
-
-
-app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
-});
-
 
 app.get("/hello", (req, res) => {
   res.end("<html><body>Hello <b>World</b></body></html>\n");

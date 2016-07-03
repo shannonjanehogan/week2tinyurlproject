@@ -2,3 +2,5 @@
 /views/.DS_Store
 views/partials/.DS_Store
 node_modules/
+mongo_example.js
+.env
