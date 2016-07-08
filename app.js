@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser");
 const methodOverride = require('method-override')
 const generateRandomShortURL = require('./generate_random_shortURL.js');
@@ -15,9 +16,11 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   dbInstance = db;
 });
 
+app.use(cookieParser());
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded());
 app.use(methodOverride('_method'));
+
 
 
 app.put("/urls/:id", (req, res) => {
@@ -36,7 +39,10 @@ app.delete("/urls/:id", (req, res) => {
 
 
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = {
+    username: req.cookies["username"],
+  };
+  res.render("urls_new", templateVars);
 });
 
 
@@ -48,6 +54,15 @@ app.post("/urls", (req, res) => {
   });
 });
 
+app.post("/login", (req, res) => {
+  res.cookie("username", req.body.username);
+  res.redirect("/");
+});
+
+app.post("/logout", (req, res) => {
+  res.clearCookie("username");
+  res.redirect("/");
+});
 
 app.get("/", (req, res) => {
   res.redirect("/urls");
@@ -56,16 +71,22 @@ app.get("/", (req, res) => {
 
 app.get("/urls", (req, res) => {
   dbInstance.collection("urls").find().toArray((err, results) => {
-    let urlCollection = {urls: results};
-    res.render("urls_index", urlCollection);
+    let templateVars = {
+      urls: results,
+      username: req.cookies["username"],
+    };
+    res.render("urls_index", templateVars);
   });
 });
 
 
 app.get("/urls/:id", (req, res) => {
-  let shortURL = req.params.id;
   dbInstance.collection("urls").findOne({shortURL: shortURL}, (err, result) => {
-    let templateVars = result;
+    let templateVars = {
+      username: req.cookies["username"],
+      shortURL: req.params.id,
+      result: result,
+    };
     res.render("urls_show", templateVars);
   });
 });
